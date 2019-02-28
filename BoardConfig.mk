@@ -45,9 +45,9 @@ TARGET_BOOTLOADER_BOARD_NAME := SDM845
 TARGET_NO_BOOTLOADER := true
 
 # Kernel
-#TARGET_KERNEL_CONFIG := star2qlte_chn_defconfig
-#TARGET_KERNEL_SOURCE := kernel/samsung/sdm845
-TARGET_PREBUILT_KERNEL := device/samsung/star2qltechn/boot.img-zImage
+# TARGET_KERNEL_CONFIG := star2qlte_chn_hk_defconfig
+# TARGET_KERNEL_SOURCE := kernel/samsung/sdm845
+TARGET_PREBUILT_KERNEL := device/samsung/star2qltechn/Image.gz-dtb
 TARGET_KERNEL_ARCH := arm64
 TARGET_KERNEL_HEADER_ARCH := arm64
 TARGET_KERNEL_APPEND_DTB := true
