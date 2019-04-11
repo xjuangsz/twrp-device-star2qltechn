@@ -22,3 +22,31 @@ on init
 service qseecomd /sbin/qseecomd
     disabled
     seclabel u:r:recovery:s0
+	
+# This helps fix ld.config.txt errors from the linker on Android 8.1+
+service ldconfigtxt /sbin/touch /sbin/ld.config.txt
+    oneshot
+    seclabel u:r:recovery:s0
+
+on boot
+	export LD_CONFIG_FILE /sbin/ld.config.txt
+
+on init
+    start hwservicemanager
+    start boot-1-0
+    start prepdecrypt
+    #setprop crypto.ready 1
+
+on property:crypto.ready=0
+    stop sbinqseecomd
+    stop keymaster-3-0
+    stop gatekeeper-1-0
+    stop servicemanager
+
+on property:crypto.ready=1
+    start sbinqseecomd
+
+on property:sys.listeners.registered=true
+    start keymaster-3-0
+    start gatekeeper-1-0
+    start servicemanager
